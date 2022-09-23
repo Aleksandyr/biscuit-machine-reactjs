@@ -1,0 +1,58 @@
+.machine {
+    margin: 0 auto;
+}
+
+.temporary-test {
+    display: flex;
+}
+
+.biscuit-item {
+    width: 10px;
+    height: 10px;
+    background-color: brown;
+}
+
+.biscuit-item.stamped {
+    width: 16px;
+    height: 6px;
+    margin-top: 2px;
+}
+
+.biscuit {
+    position: absolute;
+    z-index: -1;
+}
+
+.biscuit.extruder {
+    top: 100px;
+    left: 323px;
+}
+
+.biscuit.spitted {
+    top: 165px;
+    left: 323px;
+    transition: all 2s;
+}
+
+.biscuit.stamper {
+    top: 165px;
+    left: 386px;
+    transition: all 2s;
+}
+/* 
+.biscuit.stamped > .biscuit-item {
+    width: 16px;
+    height: 6px;
+    margin-top: 2px;
+    transition: all 0s 2s;
+} */
+
+.biscuit.oven {
+    top: 165px;
+    left: 480px;
+    transition: all 2s;
+}
+
+.no-biscuit {
+    display: none;
+}
