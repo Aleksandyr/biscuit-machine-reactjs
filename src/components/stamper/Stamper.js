@@ -65,11 +65,11 @@ const StamperSVG = ({ovenHeated, switchValState, releaseStamper}) => {
             return prev === 18 ? 0 : 18
         });
 
-        const interval = setInterval(() => {
+        const timeout = setTimeout(() => {
             setPulse((prev) => prev + 1);
         }, 1000)
 
-        return () => clearInterval(interval);
+        return () => clearTimeout(timeout);
     }, [pulse, ovenHeated, switchValState, releaseStamper]);
 
     const animate = `#stamp { 

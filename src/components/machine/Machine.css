@@ -17,14 +17,14 @@
 }
 
 .biscuit-item {
-    width: 10px;
-    height: 10px;
+    width: 1rem;
+    height: 1rem;
     background-color: brown;
 }
 
 .biscuit-item.stamped {
-    width: 16px;
-    height: 6px;
+    width: 1.6rem;
+    height: .6rem;
     margin-top: .4rem;
 }
 

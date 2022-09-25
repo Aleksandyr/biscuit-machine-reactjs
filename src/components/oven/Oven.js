@@ -65,8 +65,9 @@ const Oven = (props) => {
                 <path id="oven" d="M0.5 1V91H14.5V49.8571H126.5V91H140.5V1H0.5Z" stroke="black"/>
             </svg>
 
-
-            <div className="oven-deg">{rheotanDeg}</div>
+            <div className="oven-deg">
+                <div className="oven-deg__text">{rheotanDeg}</div>
+            </div>
             <Rheotan ovenState={props.power} 
                 preheating={preheating} 
                 onDegChange={onDegChange} 

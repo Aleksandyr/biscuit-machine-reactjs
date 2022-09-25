@@ -50,9 +50,7 @@ const Rheotan = ({ovenState, preheating, onDegChange, regulator, shutDown}) => {
     const setRheotanColor = (color) => {
         document.documentElement.style.setProperty('--rheotan-color', `rgba(230, 23, 19, ${(deg / 1000 * 2)})`);
     }
-    return (<>
-            <div className='rheotan'></div>
-    </>)
+    return (<div className='rheotan'></div>)
 }
 
 export default Rheotan;

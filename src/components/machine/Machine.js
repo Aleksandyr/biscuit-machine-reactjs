@@ -69,7 +69,7 @@ const Machine = () => {
             return;
         }
 
-        const interval = setInterval(() => {
+        const timeout = setTimeout(() => {
             /**
              * Release the stamper if we were paused.
              */
@@ -78,7 +78,7 @@ const Machine = () => {
             callback();
         }, 2000);
 
-        return () => clearInterval(interval);
+        return () => clearTimeout(timeout);
     }, [switchState.value, biscuitId, ovenHeated])
 
     /**
