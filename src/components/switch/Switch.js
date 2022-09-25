@@ -25,13 +25,19 @@ const Switch = ({onValueChange, onPauseMessageSend}) => {
 
     return (
         <fieldset className="machine-switch" onChange={onSwitchChange}>
-            <label htmlFor="on">On</label>
-            <input type="radio" name="switch" id="on" value="on" />
-            <label htmlFor="pause">Pause</label>
-            <input type="radio" name="switch" id="pause" value="pause" 
-                onPointerDown={onPauseClick} disabled={disablePause} />
-            <label htmlFor="off">Off</label>
-            <input type="radio" name="switch" id="off" value="off" />
+            <div className='radio-button'>
+                <input type="radio" name="switch" id="on" value="on" />
+                <label className='radio-label' htmlFor="on">On</label>
+            </div>
+            <div className="radio-button">
+                <input type="radio" name="switch" id="pause" value="pause" 
+                    onPointerDown={onPauseClick} disabled={disablePause} />
+                <label className='radio-label' htmlFor="pause">Pause</label>
+            </div>
+            <div className="radio-button">
+                <input type="radio" name="switch" id="off" value="off" />
+                <label className='radio-label' htmlFor="off">Off</label>
+            </div>
         </fieldset>
     )
 }

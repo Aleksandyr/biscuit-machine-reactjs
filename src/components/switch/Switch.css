@@ -1,3 +1,53 @@
 .machine-switch {
     border: none;
+    display: flex;
+    justify-content: space-around;
+}
+
+.radio-button {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.radio-label {
+    font-size: 2rem;
+}
+
+input[type="radio"] {
+    appearance: none;
+    font: inherit;
+    width: 2rem;
+    height: 2rem;
+    border-radius: 50%;
+    margin: 1rem;
+    outline: max(2px, 0.15rem) solid black;
+    outline-offset: max(2px, 0.15rem);
+}
+
+/**
+* Could have used mixins with sass
+*/
+input[type="radio"]:checked#off {
+    background-color: red;
+    outline: max(2px, 0.15rem) solid red;
+    transition: all 500ms;
+}
+
+input[type="radio"]:checked#on {
+    background-color: green;
+    outline: max(2px, 0.15rem) solid green;
+    transition: all 500ms;
+}
+
+input[type="radio"]:checked#pause {
+    background-color: black;
+    outline: max(2px, 0.15rem) solid black;
+    transition: all 500ms;
+}
+
+input[type="radio"]:disabled {
+    background-color: lightgray;
+    outline: max(2px, 0.15rem) solid lightgray;
+    transition: all 500ms;
 }

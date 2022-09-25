@@ -55,6 +55,7 @@ const Machine = () => {
         shutdownTheMachine();
 
         if (stopMachine) {
+            setMachineMessage('');
             return;
         }
 

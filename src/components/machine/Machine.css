@@ -22,7 +22,7 @@
 
 .message-box {
     padding: 1rem;
-    margin: 1rem 0;
+    margin: 4rem 0 2rem 0;
     width: 95%;
     height: 2rem;
     font-size: medium;
@@ -39,7 +39,7 @@
 }
 
 .message-box__text {
-    fill: red;
+    color: red;
 }
 
 .temporary-test {
@@ -51,10 +51,6 @@
 .biscuit-item {
     width: 3rem;
     height: 2rem;
-}
-
-.biscuit-item.burned { 
-    /* background-image: url(/svg/burnedBiscuit.svg); */
 }
 
 .biscuit {
@@ -93,4 +89,5 @@
     width: 100%;
     height: .5rem;
     background-color: black;
+    margin-bottom: 2rem;
 }
