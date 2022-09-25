@@ -2,6 +2,24 @@
     height: 100%;
 }
 
+.biscuits-counter{
+    display: flex;
+    justify-content: space-around;
+}
+
+.counter {
+    display: flex;
+    align-items: center;
+}
+
+.biscuits-counter__image {
+    width: 5rem;
+}
+
+.biscuits-counter__text {
+    font-size: 2rem;
+}
+
 .message-box {
     padding: 1rem;
     margin: 1rem 0;

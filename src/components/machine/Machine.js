@@ -9,6 +9,8 @@ import './Machine.css';
 const biscuitSvg = process.env.PUBLIC_URL + '/svg/biscuit.svg';
 const doughSvg = process.env.PUBLIC_URL + '/svg/dough.svg';
 const burnedBiscuitSvg = process.env.PUBLIC_URL + '/svg/burnedBiscuit.svg';
+const biscuitsCounterImage = process.env.PUBLIC_URL + '/images/biscuit.png';
+const burnedCounterImage = process.env.PUBLIC_URL + '/images/burned.png';
 
 let isInitialLoad = true;
 
@@ -257,8 +259,20 @@ const Machine = () => {
     // TODO: Refactor
     return (
         <div className='machine'>
-            <div>Biscuits: {biscuitsCounter}</div>
-            <div>Burned Biscuits: {biscuitsBurned}</div>
+            <div className='biscuits-counter'>
+                <div className='counter'>
+                    <img className='biscuits-counter__image' src={biscuitsCounterImage} alt="" />
+                    <p className='biscuits-counter__text'>
+                        {biscuitsCounter}
+                    </p>
+                </div>
+                <div className='counter'>
+                    <img className='biscuits-counter__image' src={burnedCounterImage} alt="" />
+                    <p className='biscuits-counter__text'>
+                        {biscuitsBurned}
+                    </p>
+                </div>
+            </div>
 
             <div className='message-box'>
                 <label className='message-box__label'>Warnings!</label>
@@ -273,6 +287,7 @@ const Machine = () => {
                     pulse={pulse} 
                     ovenHeated={ovenHeated} 
                     sprayingDough={sprayingDough} />
+                
                 <Stamper className='stamper' 
                     switchValState={switchState} 
                     machinePulse={pulse} 
