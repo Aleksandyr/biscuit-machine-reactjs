@@ -2,6 +2,13 @@
     margin: 0 auto;
 }
 
+.message-box {
+    padding: 10px;
+    margin: 10px;
+    width: 80%;
+    font-size: medium;
+}
+
 .temporary-test {
     display: flex;
 }

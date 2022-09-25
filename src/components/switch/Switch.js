@@ -2,21 +2,25 @@ import { useState } from 'react';
 
 import './Switch.css';
 
-const Switch = ({onValueChange}) => {
-    const [pauseState, setPauseState] = useState(false);
+const Switch = ({onValueChange, onPauseMessageSend}) => {
+    const [disablePause, setDisablePause] = useState(false);
 
     const onSwitchChange = (evt) => {
-        if (evt.target.value === 'off') {
-            setPauseState(true);
-            return;
-            // evt.preventDefault();
-        } 
-
-        if(pauseState) {
-            setPauseState(false);
+        if(disablePause) {
+            setDisablePause(false);
         }
 
+        if (evt.target.value === 'off') {
+            setDisablePause(true);
+        } 
+
         onValueChange(evt);
+    }
+
+    const onPauseClick = () => {
+        if(disablePause) {
+            onPauseMessageSend('You can\'t pause the machine while it is turnning down.')
+        }
     }
 
     return (
@@ -24,7 +28,8 @@ const Switch = ({onValueChange}) => {
             <label htmlFor="on">On</label>
             <input type="radio" name="switch" id="on" value="on" />
             <label htmlFor="pause">Pause</label>
-            <input type="radio" name="switch" id="pause" value="pause" disabled={pauseState} />
+            <input type="radio" name="switch" id="pause" value="pause" 
+                onPointerDown={onPauseClick} disabled={disablePause} />
             <label htmlFor="off">Off</label>
             <input type="radio" name="switch" id="off" value="off" />
         </fieldset>

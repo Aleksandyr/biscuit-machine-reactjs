@@ -15,6 +15,7 @@ const Machine = () => {
 
     const [pulse, setPusle] = useState(0);
     const [stopMachine, setStopMachine] = useState(false);
+    const [machineMessage, setMachineMessage] = useState('');
 
     const [releaseStamper, setReleaseStamper] = useState(false);
     
@@ -59,7 +60,7 @@ const Machine = () => {
         } else if (switchState.value === 'on') {
             callback = initializeBiscuit;
         } else if(switchState.value === 'pause'){
-            callback = biscuitBurn;
+            callback = burnBiscuit;
             /**
              * Prevent stamping the biscuit when hit pause. 
              */
@@ -118,6 +119,7 @@ const Machine = () => {
 
     const onSwitchChange = (evt) => {
         const val = evt.target.value;
+        setMachineMessage('');
         if  (val === 'on') {
             setStopMachine(false);
         }
@@ -182,7 +184,7 @@ const Machine = () => {
      * If we hit pause and there is a biscuit in the oven,
      * we burn it.
      */
-    const biscuitBurn = () => {
+    const burnBiscuit = () => {
         if (biscuits.length < 4) {
             return;
         }
@@ -195,7 +197,9 @@ const Machine = () => {
             }
 
             return prev;
-        })
+        });
+
+        setMachineMessage('A biscuit has burned!')
     }
 
     /**
@@ -243,10 +247,17 @@ const Machine = () => {
         }
     }
 
+    const onPauseMessage = (msg) => {
+        setMachineMessage(msg);
+    }
+
     // TODO: Refactor
     return (
         <div className='machine'>
-            <Switch onValueChange={onSwitchChange}></Switch>
+            <div className='message-box'>
+                {machineMessage}
+            </div>
+            <Switch onValueChange={onSwitchChange} onPauseMessageSend={onPauseMessage}></Switch>
             <div>Biscuits: {biscuitsCounter}</div>
             <div>Burned Biscuits: {biscuitsBurned}</div>
             <Oven ovenHeated={ovenheatedNotification} power={switchState.value}></Oven>
