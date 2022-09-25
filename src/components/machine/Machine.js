@@ -10,7 +10,7 @@ import './Machine.css';
 let isInitialLoad = true;
 
 const Machine = () => {
-    const [switchValue, setSwitchValue] = useState(undefined);
+    const [switchState, setSwitchState] = useState({value: undefined, changed: false});
     const [ovenHeated, setOvenHeated] = useState(false);
 
     const [pulse, setPusle] = useState(0);
@@ -27,11 +27,26 @@ const Machine = () => {
      * Dictates the lane temp and moves it forward.
      * Sets if the biscuit is burned.
      */
-        useEffect(() => {
+    useEffect(() => {
         if (isInitialLoad) {
             isInitialLoad = false;
             return;
         }
+
+        /**
+         * We track when the switch changed becase we
+         * want to prevent the stamper from flickering
+         * the stamp on every rerender once the switch 
+         * value is changed.
+         */
+        if(switchState.changed) {
+            setReleaseStamper(false);
+            setSwitchState((prev) => {
+                return {...prev, changed: false};
+            });
+        }
+
+        shutdownTheMachine();
 
         if (stopMachine) {
             return;
@@ -39,15 +54,14 @@ const Machine = () => {
 
         // TODO: Refactor
         let callback = () => {};
-        if(switchValue === 'off') {
+        if(switchState.value === 'off') {
             callback = moveLaneForward;
-        } else if (switchValue === 'on') {
+        } else if (switchState.value === 'on') {
             callback = initializeBiscuit;
-        } else if(switchValue === 'pause'){
+        } else if(switchState.value === 'pause'){
             callback = biscuitBurn;
             /**
-             * We hold the stamper on the pause. 
-             * Prevent stamp flickering when changing between on/off. 
+             * Prevent stamping the biscuit when hit pause. 
              */
             setReleaseStamper(false);
         } else {
@@ -64,7 +78,7 @@ const Machine = () => {
         }, 2000);
 
         return () => clearInterval(interval);
-    }, [switchValue, biscuitId, ovenHeated, releaseStamper])
+    }, [switchState.value, biscuitId, ovenHeated])
 
     /**
      * Moves the biscuit in the oven.
@@ -83,13 +97,6 @@ const Machine = () => {
             // TODO: Refactor
             case 5:
                 const biscuit = biscuits[4];
-                if (biscuit.phase === -1) {
-                    setReleaseStamper(false);
-                    setBuiscuits([]);
-                    setStopMachine(true);
-                    return;
-                }
-
                 if (!biscuit.burned) {
                     setBuiscitsCounter(prev => prev + 1);
                 } else {
@@ -106,7 +113,6 @@ const Machine = () => {
             default:
                 return;
         }
-
         
     }, [biscuits])
 
@@ -116,7 +122,7 @@ const Machine = () => {
             setStopMachine(false);
         }
 
-        setSwitchValue(val);
+        setSwitchState({value: val, changed: true});
     }
 
     const ovenheatedNotification = (heated) => {
@@ -161,7 +167,7 @@ const Machine = () => {
     /**
      * Prepare a new biscuit in the extruder.
      */
-    const initializeBiscuit = useCallback(() => {
+    const initializeBiscuit = () => {
         if (!ovenHeated) {
             return;
         }
@@ -170,13 +176,13 @@ const Machine = () => {
             return [{phase: 0, burned: false, id: biscuitId}, ...prev];
         });
         setBiscuitId(prev => prev + 1);
-    }, [biscuitId, ovenHeated])
+    }
 
     /**
      * If we hit pause and there is a biscuit in the oven,
      * we burn it.
      */
-    const biscuitBurn = useCallback(() => {
+    const biscuitBurn = () => {
         if (biscuits.length < 4) {
             return;
         }
@@ -190,7 +196,7 @@ const Machine = () => {
 
             return prev;
         })
-    }, [biscuitId])
+    }
 
     /**
      * Sets biscuit classes for animations.
@@ -227,22 +233,32 @@ const Machine = () => {
         });
     }, [biscuits])
 
+    const shutdownTheMachine = () => {
+        const ifThereAreBiscuits = biscuits.findIndex(e => e.phase !== -1) >= 0;
+        if (!ifThereAreBiscuits &&
+            switchState.value === 'off') {
+                setReleaseStamper(false);
+                setBuiscuits([]);
+                setStopMachine(true);
+        }
+    }
+
     // TODO: Refactor
     return (
         <div className='machine'>
             <Switch onValueChange={onSwitchChange}></Switch>
             <div>Biscuits: {biscuitsCounter}</div>
             <div>Burned Biscuits: {biscuitsBurned}</div>
-            <Oven ovenHeated={ovenheatedNotification} power={switchValue}></Oven>
+            <Oven ovenHeated={ovenheatedNotification} power={switchState.value}></Oven>
             
             <div className='temporary-test'>
                 <Extruder className='extruder' 
-                    power={switchValue} 
+                    power={switchState.value} 
                     pulse={pulse} 
                     ovenHeated={ovenHeated} 
                     sprayingDough={sprayingDough} />
                 <Stamper className='stamper' 
-                    power={switchValue} 
+                    switchValState={switchState} 
                     machinePulse={pulse} 
                     ovenHeated={ovenHeated} 
                     stampTheDough={stampTheDough}

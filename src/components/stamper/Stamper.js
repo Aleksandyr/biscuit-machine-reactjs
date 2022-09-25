@@ -4,7 +4,7 @@ import './Stamper.css';
 
 let initialLoad = true;
 
-const Stamper = ({power, machinePulse, ovenHeated, stampTheDough, releaseStamper}) => {
+const Stamper = ({switchValState, machinePulse, ovenHeated, stampTheDough, releaseStamper}) => {
 
     useEffect(() => {
         if(initialLoad) {
@@ -15,7 +15,7 @@ const Stamper = ({power, machinePulse, ovenHeated, stampTheDough, releaseStamper
         /**
          * If we hit pause we do not send stamp signals to the machine.
          */
-        if (!ovenHeated || (!power || power === 'pause')) {
+        if (!ovenHeated || (!switchValState.value || switchValState.value === 'pause')) {
             return;
         }
 
@@ -23,38 +23,36 @@ const Stamper = ({power, machinePulse, ovenHeated, stampTheDough, releaseStamper
          * Tells the machine when to stamp the biscuit.
          */
         stampTheDough();
-    }, [power, ovenHeated, machinePulse]);
+    }, [switchValState, ovenHeated, machinePulse]);
 
     return (
         <div>
-            <StamperSVG ovenHeated={ovenHeated} power={power} releaseStamper={releaseStamper}></StamperSVG>
+            <StamperSVG ovenHeated={ovenHeated} switchValState={switchValState} releaseStamper={releaseStamper}></StamperSVG>
         </div>
     )
 }
 
 export default Stamper;
 
-const StamperSVG = ({ovenHeated, power, releaseStamper}) => {
+const StamperSVG = ({ovenHeated, switchValState, releaseStamper}) => {
     const [stampDistance, setStampDistance] = useState(18);
     const [pulse, setPulse] = useState(0);
 
     useEffect(() => {
 
-        /**
-         * We hold the stamp up between on/off switches. 
-         * Otherwise it runs right after we change the switch value
-         * but the biscuits stays on the same position at the lane.
-         */
-        if(!releaseStamper) {
+        if(!switchValState.value) {
             return;
         }
 
         /**
-         * We keep the stamp up when we hit pause
+         * We hold the stamp up between on/off/pause switches. 
+         * Otherwise it runs right after we change the switch value
+         * over a biscuit it looks like the stamp goes over the 
+         * biscuit without stamping it. Like a flicker.
          */
-        if (!power || power === 'pause') {
+        if(!releaseStamper || switchValState.value === 'pause' || switchValState.changed) {
             setStampDistance(18);
-            return
+            return;
         }
 
         /**
@@ -74,7 +72,7 @@ const StamperSVG = ({ovenHeated, power, releaseStamper}) => {
         }, 1000)
 
         return () => clearInterval(interval);
-    }, [pulse, ovenHeated, power, releaseStamper]);
+    }, [pulse, ovenHeated, switchValState, releaseStamper]);
 
     const animate = `#stamp { 
         transform: translateY(-${stampDistance}px);
