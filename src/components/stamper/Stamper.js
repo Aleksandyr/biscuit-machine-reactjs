@@ -76,7 +76,7 @@ const StamperSVG = ({ovenHeated, switchValState, releaseStamper}) => {
         transform: translateY(-${stampDistance}px);
     }`; 
     return (
-        <svg className="stamper-machine" width="59" height="94" viewBox="0 0 59 90" fill="none">
+        <svg className="stamper-machine" width="59" height="94" viewBox="0 0 59 88" fill="none">
             <style>
                 {animate}
             </style>

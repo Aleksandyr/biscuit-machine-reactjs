@@ -6,6 +6,9 @@ import Stamper from '../stamper/Stamper';
 import Extruder from '../extruder/Extruder';
 
 import './Machine.css';
+const biscuitSvg = process.env.PUBLIC_URL + '/svg/biscuit.svg';
+const doughSvg = process.env.PUBLIC_URL + '/svg/dough.svg';
+const burnedBiscuitSvg = process.env.PUBLIC_URL + '/svg/burnedBiscuit.svg';
 
 let isInitialLoad = true;
 
@@ -254,8 +257,14 @@ const Machine = () => {
     // TODO: Refactor
     return (
         <div className='machine'>
+            <div>Biscuits: {biscuitsCounter}</div>
+            <div>Burned Biscuits: {biscuitsBurned}</div>
+
             <div className='message-box'>
-                {machineMessage}
+                <label className='message-box__label'>Warnings!</label>
+                <p className='message-box__text'>
+                    {machineMessage}
+                </p>
             </div>
             
             <div className='temporary-test'>
@@ -275,7 +284,20 @@ const Machine = () => {
                     {biscuits.map((item) => (
                         <div key={item.id} 
                             className={getBiscuitPhase(item)}>
-                            <div className={item.phase === 3 ? "biscuit-item stamped" : 'biscuit-item'}></div>
+                            {item.burned ? 
+                                <object 
+                                    className={`biscuit-item`}
+                                        data={burnedBiscuitSvg}> </object> :
+                                item.phase <= 2 ? 
+                                <object 
+                                    className={`biscuit-item`}
+                                        data={doughSvg}> </object> : 
+                                <object 
+                                    className={`biscuit-item 
+                                        ${item.phase === 3 ? 'stamped' : ''} 
+                                        ${item.burned ? 'burned' : ''}`} 
+                                        data={biscuitSvg}> </object>
+                                }
                         </div>
                     ))}
                 </div>
@@ -284,8 +306,6 @@ const Machine = () => {
             <div className='lane'></div>
 
             <Switch onValueChange={onSwitchChange} onPauseMessageSend={onPauseMessage}></Switch>
-            <div>Biscuits: {biscuitsCounter}</div>
-            <div>Burned Biscuits: {biscuitsBurned}</div>
         </div>
     )
 }

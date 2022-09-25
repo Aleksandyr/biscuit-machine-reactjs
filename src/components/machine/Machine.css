@@ -4,28 +4,39 @@
 
 .message-box {
     padding: 1rem;
-    margin: 1rem;
-    width: 100%;
+    margin: 1rem 0;
+    width: 95%;
     height: 2rem;
     font-size: medium;
-    background-color: black;
+    border: 1px solid black;
+    text-align: center;
+    position: relative;
+}
+
+.message-box__label {
+    position: absolute;
+    top: -1rem;
+    left: 21.5rem;
+    background-color: white;
+}
+
+.message-box__text {
+    fill: red;
 }
 
 .temporary-test {
     display: flex;
     justify-content: space-between;
+    position: relative;
 }
 
 .biscuit-item {
-    width: 1rem;
-    height: 1rem;
-    background-color: brown;
+    width: 3rem;
+    height: 2rem;
 }
 
-.biscuit-item.stamped {
-    width: 1.6rem;
-    height: .6rem;
-    margin-top: .4rem;
+.biscuit-item.burned { 
+    /* background-image: url(/svg/burnedBiscuit.svg); */
 }
 
 .biscuit {
@@ -34,25 +45,25 @@
 }
 
 .biscuit.extruder {
-    top: 7rem;
-    left: 21.2rem;
+    top: 1rem;
+    left: 2rem;
 }
 
 .biscuit.spitted {
-    top: 14.4rem;
-    left: 21.2rem;
+    top: 7.9rem;
+    left: 2rem;
     transition: all 2s;
 }
 
 .biscuit.stamper {
-    top: 14.4rem;
-    left: 35.5rem;
+    top: 7.9rem;
+    left: 16rem;
     transition: all 2s;
 }
 
 .biscuit.oven {
-    top: 14.4rem;
-    left: 60.5rem;
+    top: 7.9rem;
+    left: 42rem;
     transition: all 2s;
 }
 

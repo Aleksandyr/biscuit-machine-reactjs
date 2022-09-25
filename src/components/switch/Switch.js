@@ -19,7 +19,7 @@ const Switch = ({onValueChange, onPauseMessageSend}) => {
 
     const onPauseClick = () => {
         if(disablePause) {
-            onPauseMessageSend('You can\'t pause the machine while it is turnning down.')
+            onPauseMessageSend('You can\'t pause the machine while oven is turnning down!')
         }
     }
 
