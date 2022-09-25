@@ -1,5 +1,7 @@
 import { useCallback, useEffect, useState } from "react";
 
+import './Rheotan.css';
+
 let initialLoad = true;
 
 const Rheotan = ({ovenState, preheating, onDegChange, regulator, shutDown}) => {
@@ -31,6 +33,8 @@ const Rheotan = ({ovenState, preheating, onDegChange, regulator, shutDown}) => {
             return;
         }
 
+        setRheotanColor(deg);
+
         const timeOut = setTimeout(() => {
             setDeg(prevVal => {
                 const val = prevVal + getDeg();
@@ -42,8 +46,12 @@ const Rheotan = ({ovenState, preheating, onDegChange, regulator, shutDown}) => {
         return () => clearTimeout(timeOut);
     }, [deg, ovenState, getDeg])
     
+
+    const setRheotanColor = (color) => {
+        document.documentElement.style.setProperty('--rheotan-color', `rgba(230, 23, 19, ${(deg / 1000 * 2)})`);
+    }
     return (<>
-            <div>Oven deg: {deg}</div>
+            <div className='rheotan'></div>
     </>)
 }
 

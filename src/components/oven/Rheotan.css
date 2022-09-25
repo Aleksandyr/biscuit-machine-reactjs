@@ -1,0 +1,12 @@
+:root {
+    --rheotan-color: white;
+}
+
+.rheotan {
+    width: 10.8rem;
+    height: .5rem;
+    background-color: var(--rheotan-color);
+    position: absolute;
+    top: 5.2rem;
+    left: 1.6rem;
+}

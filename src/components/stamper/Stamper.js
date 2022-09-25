@@ -26,9 +26,7 @@ const Stamper = ({switchValState, machinePulse, ovenHeated, stampTheDough, relea
     }, [switchValState, ovenHeated, machinePulse]);
 
     return (
-        <div>
-            <StamperSVG ovenHeated={ovenHeated} switchValState={switchValState} releaseStamper={releaseStamper}></StamperSVG>
-        </div>
+        <StamperSVG ovenHeated={ovenHeated} switchValState={switchValState} releaseStamper={releaseStamper}></StamperSVG>
     )
 }
 
@@ -78,7 +76,7 @@ const StamperSVG = ({ovenHeated, switchValState, releaseStamper}) => {
         transform: translateY(-${stampDistance}px);
     }`; 
     return (
-        <svg width="59" height="84" viewBox="0 0 59 84" fill="none">
+        <svg className="stamper-machine" width="59" height="94" viewBox="0 0 59 90" fill="none">
             <style>
                 {animate}
             </style>
@@ -91,7 +89,7 @@ const StamperSVG = ({ovenHeated, switchValState, releaseStamper}) => {
                         <path d="M27.6 61H32.6V79H27.6V61Z" fill="#D9D9D9" />
                         <path d="M31.6 61V79H33.6V61H31.6ZM28.6 79V61H26.6V79H28.6Z" fill="#9B7F7F" mask="url(#path-1-inside-1_14_27)" />
                     </g>
-                    <rect id="Rectangle 3" x="39.5" y="79.5" width="4" height="19" transform="rotate(90 39.5 79.5)" fill="#D9D9D9" stroke="#9B7F7F" />
+                    <path id="Vector 5" d="M13 91.5L22.5 79H38L48.5 91.5H13Z" fill="#D9D9D9" stroke="#9B7F7F" />
                 </g>
                 <g id="body">
                     <path id="Vector 2" d="M16.5455 54.8636L1 1H58L42.4545 54.8636H16.5455Z" fill="#D9D9D9" stroke="#9B7F7F" />

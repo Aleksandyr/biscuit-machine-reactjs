@@ -1,0 +1,11 @@
+.oven {
+    position: relative;
+    /* margin-top: 5rem; */
+}
+
+.oven-deg {
+    position: absolute;
+    top: 1.1rem;
+    left: 5.3rem;
+    font-size: 2rem;
+}

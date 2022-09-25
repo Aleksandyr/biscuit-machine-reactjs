@@ -1,11 +1,14 @@
 import { useCallback, useEffect, useState } from "react";
 import Rheotan from "./Rheotan";
 
+import "./Oven.css";
+
 const Oven = (props) => {
     const [preheating, setPreheating] = useState(false);
     const [heated, setHeated] = useState(false);
     const [regulator, setRegulator] = useState(false);
     const [shutDown, setShutDown] = useState(false);
+    const [rheotanDeg, setRheotanDeg] = useState(0);
 
     /**
      * Start preheating or shutdown
@@ -25,6 +28,7 @@ const Oven = (props) => {
 
     // Enables regulator and stops preheating
     const onDegChange = useCallback((deg) => {
+        setRheotanDeg(deg);
         /**
          * Once the oven is heated to 240 deg
          * Turn on the regulator and set heated state
@@ -56,7 +60,13 @@ const Oven = (props) => {
     }, [heated, preheating, shutDown])
 
     return (
-        <div>
+        <div className="oven">
+            <svg width="141" height="92" viewBox="0 0 141 90" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path id="oven" d="M0.5 1V91H14.5V49.8571H126.5V91H140.5V1H0.5Z" stroke="black"/>
+            </svg>
+
+
+            <div className="oven-deg">{rheotanDeg}</div>
             <Rheotan ovenState={props.power} 
                 preheating={preheating} 
                 onDegChange={onDegChange} 

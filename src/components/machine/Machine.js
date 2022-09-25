@@ -257,10 +257,6 @@ const Machine = () => {
             <div className='message-box'>
                 {machineMessage}
             </div>
-            <Switch onValueChange={onSwitchChange} onPauseMessageSend={onPauseMessage}></Switch>
-            <div>Biscuits: {biscuitsCounter}</div>
-            <div>Burned Biscuits: {biscuitsBurned}</div>
-            <Oven ovenHeated={ovenheatedNotification} power={switchState.value}></Oven>
             
             <div className='temporary-test'>
                 <Extruder className='extruder' 
@@ -283,7 +279,13 @@ const Machine = () => {
                         </div>
                     ))}
                 </div>
+                <Oven ovenHeated={ovenheatedNotification} power={switchState.value}></Oven>
             </div>
+            <div className='lane'></div>
+
+            <Switch onValueChange={onSwitchChange} onPauseMessageSend={onPauseMessage}></Switch>
+            <div>Biscuits: {biscuitsCounter}</div>
+            <div>Burned Biscuits: {biscuitsBurned}</div>
         </div>
     )
 }
