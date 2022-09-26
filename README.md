@@ -3,6 +3,7 @@
 ## What might have been done better:
 1. To use typescript for better typization, interfaces, enums, etc.
 2. Didn't use redux as it was only max 2 levels nest of components.
+3. I could have created a biscuit component for better structure and readability.
 
 ### Important info about the project:
 #### Biscuit metadata: {phase, burned, id}
