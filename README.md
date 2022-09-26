@@ -14,7 +14,7 @@
         5. In the basket
 #### Warnings:
     1. If a biscuit remains more than 2 secs in the oven it burns.
-    2. It's not possible to hit **pause** after we have hit **off**. We have to wait for the oven 
+    2. It's not possible to hit PAUSE after we have hit OFF. We have to wait for the oven 
         to get cold or to turn it on again.    
 
 #### Components:
