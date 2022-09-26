@@ -197,13 +197,12 @@ const Machine = () => {
             const newState = [...prev];
             if(newState[3].phase === 3) {
                 newState[3].burned = true;
+                setMachineMessage('A biscuit has burned!')
                 return newState;
             }
 
             return prev;
         });
-
-        setMachineMessage('A biscuit has burned!')
     }
 
     /**
