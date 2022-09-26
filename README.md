@@ -17,9 +17,9 @@
     2. It's not possible to hit pause after we have hit off. We have to wait for the oven to get cold or to turn it on again.    
 
 #### Components:
-  1. Machine - the engine and the controll center.
-  2. Stamper
-  3. Extruder
-  4. Switch
-  5. Oven
-    * Rheotan
+    1. Machine - the engine and the controll center.
+    2. Stamper
+    3. Extruder
+    4. Switch
+    5. Oven
+        * Rheotan
