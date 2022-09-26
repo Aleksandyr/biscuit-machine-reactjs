@@ -6,7 +6,7 @@
 
 ### Important info about the project:
 #### Biscuit metadata: {phase, burned, id}
-    a. Phases:
+    Phases:
         1. In extruder
         2. On the lane
         3. Stamped
@@ -22,4 +22,4 @@
   3. Extruder
   4. Switch
   5. Oven
-    1. Rheotan
+    * Rheotan
