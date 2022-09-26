@@ -22,4 +22,4 @@
   3. Extruder
   4. Switch
   5. Oven
-    a. Rheotan
+    1. Rheotan
