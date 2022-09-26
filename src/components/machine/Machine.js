@@ -59,7 +59,6 @@ const Machine = () => {
             return;
         }
 
-        // TODO: Refactor
         let callback = () => {};
         if(switchState.value === 'off') {
             callback = moveLaneForward;
@@ -101,7 +100,6 @@ const Machine = () => {
             case 4: 
                 changeBiscuitPhase(3);
                 break;
-            // TODO: Refactor
             case 5:
                 const biscuit = biscuits[4];
                 if (!biscuit.burned) {
@@ -220,7 +218,7 @@ const Machine = () => {
             case 1: 
                 return 'biscuit spitted';
             case 2: 
-                return 'biscuit stamper';
+                return 'biscuit stamped';
             case 3: 
                 return 'biscuit oven';
             default:
@@ -257,7 +255,6 @@ const Machine = () => {
         setMachineMessage(msg);
     }
 
-    // TODO: Refactor
     return (
         <div className='machine'>
             <div className='biscuits-counter'>
@@ -282,7 +279,7 @@ const Machine = () => {
                 </p>
             </div>
             
-            <div className='temporary-test'>
+            <div className='machine-particles'>
                 <Extruder className='extruder' 
                     power={switchState.value} 
                     pulse={pulse} 
@@ -302,16 +299,15 @@ const Machine = () => {
                             className={getBiscuitPhase(item)}>
                             {item.burned ? 
                                 <object 
-                                    className={`biscuit-item`}
+                                    className='biscuit-item'
                                         data={burnedBiscuitSvg}> </object> :
                                 item.phase <= 2 ? 
                                 <object 
-                                    className={`biscuit-item`}
+                                    className='biscuit-item'
                                         data={doughSvg}> </object> : 
                                 <object 
                                     className={`biscuit-item 
-                                        ${item.phase === 3 ? 'stamped' : ''} 
-                                        ${item.burned ? 'burned' : ''}`} 
+                                        ${item.phase === 3 ? 'stamped' : ''}`} 
                                         data={biscuitSvg}> </object>
                                 }
                         </div>

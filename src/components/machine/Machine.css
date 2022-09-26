@@ -2,7 +2,7 @@
     height: 100%;
 }
 
-.biscuits-counter{
+.biscuits-counter {
     display: flex;
     justify-content: space-around;
 }
@@ -42,7 +42,7 @@
     color: red;
 }
 
-.temporary-test {
+.machine-particles {
     display: flex;
     justify-content: space-between;
     position: relative;
@@ -69,7 +69,7 @@
     transition: all 2s;
 }
 
-.biscuit.stamper {
+.biscuit.stamped {
     top: 7.9rem;
     left: 16rem;
     transition: all 2s;
