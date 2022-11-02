@@ -4,7 +4,7 @@ import './Stamper.css';
 
 let initialLoad = true;
 
-const Stamper = ({switchValState, machinePulse, ovenHeated, stampTheDough, releaseStamper}) => {
+const Stamper = ({switchValState, machinePulse, ovenHeated, setStamper, releaseStamper}) => {
 
     useEffect(() => {
         if(initialLoad) {
@@ -22,8 +22,8 @@ const Stamper = ({switchValState, machinePulse, ovenHeated, stampTheDough, relea
         /**
          * Tells the machine when to stamp the biscuit.
          */
-        stampTheDough();
-    }, [switchValState, ovenHeated, machinePulse]);
+        setStamper(true);
+    }, [switchValState, ovenHeated, setStamper, machinePulse]);
 
     return (
         <StamperSVG ovenHeated={ovenHeated} switchValState={switchValState} releaseStamper={releaseStamper}></StamperSVG>

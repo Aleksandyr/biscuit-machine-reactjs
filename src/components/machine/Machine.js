@@ -1,4 +1,6 @@
 import { useCallback, useEffect, useState } from 'react';
+import { createSignal } from '@react-rxjs/utils';
+import { bind } from '@react-rxjs/core';
 
 import Oven from '../oven/Oven';
 import Switch from '../switch/Switch';
@@ -11,6 +13,10 @@ const doughSvg = process.env.PUBLIC_URL + '/svg/dough.svg';
 const burnedBiscuitSvg = process.env.PUBLIC_URL + '/svg/burnedBiscuit.svg';
 const biscuitsCounterImage = process.env.PUBLIC_URL + '/images/biscuit.png';
 const burnedCounterImage = process.env.PUBLIC_URL + '/images/burned.png';
+
+// RxJs setup
+const [stamperChange$, setStamper] = createSignal();
+const [useStamper, stamper$] = bind(stamperChange$, false);
 
 let isInitialLoad = true;
 
@@ -38,6 +44,15 @@ const Machine = () => {
             isInitialLoad = false;
             return;
         }
+
+        // Emit value from stamper
+        stamper$.pipe((res) => {
+            if (biscuits.length < 3) {
+                return;
+            }
+    
+            changeBiscuitPhase(2);    
+        })
 
         /**
          * We track when the switch changed becase we
@@ -147,17 +162,6 @@ const Machine = () => {
 
     }, [biscuits]);
 
-    /**
-     * Move the biscuit when the dough is stamped 
-     */
-    const stampTheDough = useCallback(() => {
-        if (biscuits.length < 3) {
-            return;
-        }
-
-        changeBiscuitPhase(2);
-
-    }, [biscuits]);
 
     /**
      * Moves the lane forward when git off.
@@ -289,7 +293,7 @@ const Machine = () => {
                     switchValState={switchState} 
                     machinePulse={pulse} 
                     ovenHeated={ovenHeated} 
-                    stampTheDough={stampTheDough}
+                    setStamper={setStamper}
                     releaseStamper={releaseStamper} />
                 
                 <div className='biscuits'>
