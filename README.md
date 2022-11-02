@@ -1,5 +1,9 @@
 # biscuit-machine-reactjs
 
+## How to start
+- npm install
+- npm run start
+
 ## What might have been done better:
 1. To use typescript for better typization, interfaces, enums, etc.
 2. Didn't use redux as it was only max 2 levels nest of components.
